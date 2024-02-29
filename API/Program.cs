@@ -31,6 +31,7 @@ var loggerFactory = services.GetRequiredService<ILoggerFactory>();
 try{
     var context = services.GetRequiredService<TiendaContext>();
     await context.Database.MigrateAsync();
+    await TiendaContextSeed.SeedAsync(context, loggerFactory);
 }catch(Exception ex){
     var logger = loggerFactory.CreateLogger<Program>();
     logger.LogError(ex, "Ocurrio un error durante la migración");
